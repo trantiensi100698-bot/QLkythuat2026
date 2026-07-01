@@ -1,0 +1,24 @@
+RewriteEngine On
+
+<FilesMatch "^config\.php$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_authz_core.c>
+  <Directory "includes">
+    Require all denied
+  </Directory>
+  <Directory "sql">
+    Require all denied
+  </Directory>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <Directory "includes">
+    Order deny,allow
+    Deny from all
+  </Directory>
+  <Directory "sql">
+    Order deny,allow
+    Deny from all
+  </Directory>
+</IfModule>
