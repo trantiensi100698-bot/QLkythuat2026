@@ -164,6 +164,115 @@ function handle_multiple_image_uploads(string $fieldName, string $subDir): array
     return array_values(array_filter($paths));
 }
 
+/**
+ * Handle a multi-file <input type="file" name="fieldName[]" multiple> upload for
+ * report documents (Word/Excel/PowerPoint/PDF). Returns array of ['path' => .., 'name' => ..].
+ */
+function handle_multiple_document_uploads(string $fieldName, string $subDir): array
+{
+    if (empty($_FILES[$fieldName]) || empty($_FILES[$fieldName]['name'][0])) {
+        return [];
+    }
+
+    $allowedExtensions = [
+        'doc' => 'application/msword',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'xls' => 'application/vnd.ms-excel',
+        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'ppt' => 'application/vnd.ms-powerpoint',
+        'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'pdf' => 'application/pdf',
+    ];
+
+    $files = $_FILES[$fieldName];
+    $count = count($files['name']);
+    $results = [];
+
+    for ($i = 0; $i < $count; $i++) {
+        if ($files['error'][$i] === UPLOAD_ERR_NO_FILE) {
+            continue;
+        }
+        if ($files['error'][$i] !== UPLOAD_ERR_OK) {
+            throw new RuntimeException('Loi khi tai file len (ma loi: ' . $files['error'][$i] . ').');
+        }
+        if ($files['size'][$i] > 20 * 1024 * 1024) {
+            throw new RuntimeException('File khong duoc vuot qua 20MB: ' . $files['name'][$i]);
+        }
+
+        $originalName = $files['name'][$i];
+        $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+        if (!isset($allowedExtensions[$ext])) {
+            throw new RuntimeException('Dinh dang file khong duoc ho tro: ' . $originalName . ' (chi nhan Word/Excel/PowerPoint/PDF).');
+        }
+
+        $uploadRoot = app_config()['app']['upload_dir'];
+        $targetDir = $uploadRoot . '/' . $subDir;
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        $storedName = bin2hex(random_bytes(16)) . '.' . $ext;
+        $targetPath = $targetDir . '/' . $storedName;
+
+        if (!move_uploaded_file($files['tmp_name'][$i], $targetPath)) {
+            throw new RuntimeException('Khong the luu file: ' . $originalName);
+        }
+
+        $results[] = ['path' => 'uploads/' . $subDir . '/' . $storedName, 'name' => $originalName];
+    }
+
+    return $results;
+}
+
+function rd_category_label(string $category): string
+{
+    $labels = [
+        'khi_doc' => 'Xu ly khi doc NH4/NO2',
+        'xu_ly_nuoc_truoc_tha' => 'Xu ly nuoc truoc tha giong',
+        'khac' => 'Khac',
+    ];
+    return $labels[$category] ?? $category;
+}
+
+function rd_status_label(string $status): string
+{
+    $labels = [
+        'dang_thuc_hien' => 'Dang thuc hien',
+        'hoan_thanh' => 'Hoan thanh',
+        'tam_dung' => 'Tam dung',
+    ];
+    return $labels[$status] ?? $status;
+}
+
+function rd_status_badge_class(string $status): string
+{
+    $classes = [
+        'dang_thuc_hien' => 'status-pill status-dang-xu-ly',
+        'hoan_thanh' => 'status-pill status-hoan-thanh',
+        'tam_dung' => 'status-pill status-moi',
+    ];
+    return $classes[$status] ?? 'status-pill status-moi';
+}
+
+function market_visit_type_label(string $type): string
+{
+    $labels = [
+        'thuyet_trinh_demo' => 'Thuyet trinh / demo san pham',
+        'tham_ao_dinh_ky' => 'Tham ao khach hang dinh ky',
+        'chuyen_giao_cong_nghe' => 'Chuyen giao cong nghe',
+    ];
+    return $labels[$type] ?? $type;
+}
+
+function market_visit_type_tag_class(string $type): string
+{
+    $classes = [
+        'thuyet_trinh_demo' => 'tag-purple',
+        'tham_ao_dinh_ky' => 'tag-blue',
+        'chuyen_giao_cong_nghe' => 'tag-teal',
+    ];
+    return $classes[$type] ?? 'tag-gray';
+}
+
 function redirect(string $path): void
 {
     header('Location: ' . base_url() . $path);

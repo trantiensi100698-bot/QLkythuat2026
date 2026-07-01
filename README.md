@@ -2,13 +2,13 @@
 
 Web noi bo quan ly ky thuat cho Dathop, gom 4 phan chinh:
 
-1. **Du an R&D** (khung, dang xay dung)
-2. **Nhat ky farm nuoi Biogency** (khung, dang xay dung)
+1. **Du an R&D**: quan ly thi nghiem (vi du xu ly khi doc NH4/NO2, xu ly nuoc truoc tha giong), ghi nhan chi tieu do dac truoc/sau khi dung san pham, san pham su dung + chi phi, danh gia uu/nhuoc diem, phan tich chi phi, dinh kem file bao cao Word/PPT/Excel/PDF de chia se.
+2. **Nhat ky farm nuoi Biogency**: quan ly danh sach ao cua farm, ghi nhat ky theo ngay/theo ao (chi tieu moi truong, luong cho an, san pham da dung, hinh anh, ghi chu bat thuong).
 3. **Quan ly ky thuat thi truong**
-   - **Ho tro ky thuat** (da hoan thien MVP):
+   - **Ho tro ky thuat**:
      - Thu vien cong thuc ket hop san pham & quy trinh xu ly (khi doc, gan, duong ruot, mau nuoc, uong gieo, ao lang, day ao/nhot bat...)
      - Chan doan ao khach hang: sale nhap dien tich ao + chi tieu moi truong + hinh anh, RD tu van tu xa dua tren du lieu, gan quy trinh phu hop tu thu vien
-   - **Ho tro thi truong** (khung, dang xay dung): thuyet trinh/demo, tham ao dinh ky, chuyen giao cong nghe
+   - **Ho tro thi truong**: ghi nhan thuyet trinh/demo san pham, tham ao dinh ky, chuyen giao cong nghe - kem mau kiem tra tai ao, hinh anh, phan hoi khach hang va file bao cao chuyen di (Word/PPT/Excel/PDF) de gui Ms Tu Anh.
 4. Dang nhap phan quyen: `rd` (R&D ky thuat), `sale` (nhan vien thi truong), `manager` (quan ly)
 
 Stack: PHP thuan (khong framework) + MySQL + Bootstrap 5 (CDN). Chon PHP/MySQL de chay duoc tren moi goi hosting cua Hostinger, ke ca shared hosting re nhat (khong can Node.js/VPS).
@@ -55,18 +55,17 @@ Ap dung duoc voi **moi goi Hostinger** (Shared/Business/Premium) vi chi can PHP 
 ```
 /index.php, login.php, logout.php     Trang chinh + xac thuc
 /includes/                             Ket noi DB, phan quyen, layout dung chung
-/modules/rnd/                          Module Du an R&D (khung)
-/modules/nhat-ky-farm/                 Module Nhat ky farm Biogency (khung)
+/modules/rnd/                          Du an R&D: thi nghiem, so lieu, chi phi, bao cao
+/modules/nhat-ky-farm/                 Nhat ky farm Biogency: quan ly ao + nhat ky theo ngay
 /modules/ho-tro-ky-thuat/thu-vien/     Thu vien cong thuc & quy trinh xu ly
 /modules/ho-tro-ky-thuat/chan-doan/    Chan doan ao khach hang
-/modules/ho-tro-thi-truong/            Module Ho tro thi truong (khung)
+/modules/ho-tro-thi-truong/            Thuyet trinh/demo, tham ao dinh ky, chuyen giao cong nghe
 /sql/schema.sql                        Cau truc database
-/uploads/                              Anh upload (khong commit len git)
+/uploads/                              Anh/file upload (khong commit len git)
 ```
 
 ## Chua lam / huong phat trien tiep
 
-- Module Du an R&D: ghi nhan thi nghiem, so lieu truoc/sau, phan tich chi phi, xuat bao cao Word/PPT/Excel.
-- Module Nhat ky farm Biogency: nhat ky theo ngay/theo ao.
-- Module Ho tro thi truong: quan ly lich tham ao, bao cao chuyen di (Word/PPT/Excel) gui Ms Tu Anh.
-- Trang quan ly nguoi dung (hien tai tao qua CLI `create_admin.php`).
+- Trang quan ly nguoi dung rieng (hien tai tao tai khoan qua CLI `create_admin.php`, doi role phai sua truc tiep trong database).
+- Export/tong hop du lieu R&D va bao cao chuyen di thanh file Word/PPT/Excel tu dong (hien tai la upload file da lam san, chua tu sinh file).
+- Thong bao (email/Zalo...) khi co ca chan doan moi hoac tu van moi.
