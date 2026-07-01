@@ -22,19 +22,16 @@ Stack: PHP thuan (khong framework) + MySQL + Bootstrap 5 (CDN). Chon PHP/MySQL d
    mysql -u root -p dathop_ky_thuat < sql/schema.sql
    ```
 3. Copy `config.example.php` thanh `config.php`, dien lai thong tin database va `base_url` (vi du `http://localhost:8000`).
-4. Tao tai khoan dau tien (role R&D) qua dong lenh:
-   ```
-   php includes/create_admin.php "Nguyen Van A" rd@dathop.com.vn "MatKhauManh123"
-   ```
-5. Chay server thu:
+4. Chay server thu:
    ```
    php -S localhost:8000
    ```
-6. Mo trinh duyet: `http://localhost:8000/login.php`
+5. Mo trinh duyet: `http://localhost:8000/setup_admin.php` de tao tai khoan RD dau tien (trang nay chi dung duoc 1 lan, khi database chua co ai). Sau do dang nhap tai `http://localhost:8000/login.php`.
+6. **Quan trong**: sau khi tao xong tai khoan dau tien, XOA file `setup_admin.php` khoi server (hoac doi ten) de tranh nguoi la truy cap.
 
-Sau khi dang nhap bang tai khoan RD, vao **Danh muc > San pham Biogency** de nhap danh sach san pham, roi vao **Thu vien cong thuc / quy trinh** de tao cac quy trinh chuan (khi doc, gan, duong ruot, mau nuoc, uong gieo, ao lang, day ao/nhot bat).
+Cach khac (neu co quyen chay dong lenh CLI): `php includes/create_admin.php "Ten" email@domain.com "MatKhauManh123"`.
 
-De tao them tai khoan cho Hieu (sale) hoac Ms Tu Anh (manager), chay lai `create_admin.php` roi vao MySQL sua truc tiep cot `role` thanh `sale` hoac `manager` (hoac yeu cau bo sung trang quan ly user rieng neu can).
+Sau khi dang nhap bang tai khoan RD, vao **Danh muc > San pham Biogency** de nhap danh sach san pham, roi vao **Thu vien cong thuc / quy trinh** de tao cac quy trinh chuan (khi doc, gan, duong ruot, mau nuoc, uong gieo, ao lang, day ao/nhot bat). De tao tai khoan cho Hieu (sale) hoac Ms Tu Anh (manager), vao muc **Nguoi dung** o sidebar.
 
 ## Deploy len Hostinger
 
@@ -44,9 +41,10 @@ Ap dung duoc voi **moi goi Hostinger** (Shared/Business/Premium) vi chi can PHP 
 2. Vao **File Manager** (hoac dung FTP/SFTP), tro domain/subdomain toi thu muc goc cua project nay (thuong la `public_html` hoac 1 subfolder trong do). Upload toan bo code (tru `config.php` va thu muc `uploads/` du lieu that).
 3. Trong **Databases > phpMyAdmin**, import file `sql/schema.sql` vao database vua tao.
 4. Tren hosting, tao file `config.php` (copy tu `config.example.php`) voi thong tin database that va `base_url` la domain that, vi du `https://kythuat.dathop.com.vn`.
-5. Neu Hostinger co ho tro SSH: chay `php includes/create_admin.php ...` de tao tai khoan dau tien. Neu khong co SSH, tam thoi insert truc tiep qua phpMyAdmin (dung ham `PASSWORD_DEFAULT` cua PHP de tao hash - co the nho AI/dev tao gium 1 chuoi hash roi INSERT thu cong).
-6. Kiem tra thu muc `uploads/` co quyen ghi (thuong 755 hoac 775 tuy hosting).
-7. Truy cap domain, dang nhap va bat dau su dung.
+5. Truy cap `https://ten-mien-cua-ban/setup_admin.php` de tao tai khoan RD dau tien ngay tren trinh duyet (khong can SSH). Trang nay tu khoa sau khi da co 1 tai khoan trong he thong.
+6. **Quan trong**: sau khi tao xong tai khoan, vao File Manager XOA (hoac doi ten) file `setup_admin.php` de tranh nguoi la truy cap tao tai khoan moi.
+7. Kiem tra thu muc `uploads/` co quyen ghi (thuong 755 hoac 775 tuy hosting).
+8. Truy cap domain, dang nhap va bat dau su dung.
 
 **Bao mat**: file `.htaccess` da chan truy cap truc tiep vao `config.php`, thu muc `includes/` va `sql/`. Neu hosting dung Nginx thay vi Apache, can cau hinh chan tuong duong (hoi bo phan ho tro ky thuat cua Hostinger neu can).
 
