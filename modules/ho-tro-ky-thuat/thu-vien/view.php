@@ -31,7 +31,7 @@ include __DIR__ . '/../../../includes/layout_start.php';
 
 <div class="d-flex justify-content-between align-items-start mb-3">
   <div>
-    <span class="badge bg-primary-subtle text-primary-emphasis mb-2"><?= e(category_label($procedure['category'])) ?></span>
+    <span class="tag <?= e(category_tag_class($procedure['category'])) ?> mb-2 d-inline-block"><?= e(category_label($procedure['category'])) ?></span>
     <h4><?= e($procedure['title']) ?></h4>
     <p class="text-muted"><?= e($procedure['summary'] ?? '') ?></p>
     <small class="text-muted">Tao boi <?= e($procedure['creator_name'] ?? '-') ?> luc <?= e($procedure['created_at']) ?></small>

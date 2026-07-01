@@ -86,7 +86,7 @@ include __DIR__ . '/../../../includes/layout_start.php';
 
 <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
   <div>
-    <h4><?= e($request['customer_name']) ?> <span class="badge <?= status_badge_class($request['status']) ?>"><?= e(status_label($request['status'])) ?></span></h4>
+    <h4><?= e($request['customer_name']) ?> <span class="<?= status_badge_class($request['status']) ?>"><span class="dot <?= status_dot_class($request['status']) ?>"></span><?= e(status_label($request['status'])) ?></span></h4>
     <div class="text-muted small">
       <?= e($request['agent_name'] ?? '') ?> <?= $request['location'] ? '- '.e($request['location']) : '' ?>
       &middot; Van de: <?= e(category_label($request['problem_category'])) ?>

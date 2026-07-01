@@ -24,28 +24,33 @@ include __DIR__ . '/includes/layout_start.php';
 
 <div class="row g-3 mb-4">
   <div class="col-md-4">
-    <div class="card border-0 shadow-sm">
-      <div class="card-body">
-        <div class="text-muted small">Cong thuc / quy trinh trong thu vien</div>
-        <div class="fs-2 fw-bold"><?= $procedureCount ?></div>
-        <a href="<?= e(base_url()) ?>/modules/ho-tro-ky-thuat/thu-vien/index.php" class="small">Xem thu vien &raquo;</a>
+    <a href="<?= e(base_url()) ?>/modules/ho-tro-ky-thuat/thu-vien/index.php" class="text-decoration-none text-reset">
+      <div class="kpi-card">
+        <div class="kpi-icon" style="background:#e6f7ef;">&#128218;</div>
+        <div>
+          <div class="kpi-value"><?= $procedureCount ?></div>
+          <div class="kpi-label">Cong thuc / quy trinh trong thu vien</div>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
   <div class="col-md-4">
-    <div class="card border-0 shadow-sm">
-      <div class="card-body">
-        <div class="text-muted small">Ca chan doan dang mo / dang xu ly</div>
-        <div class="fs-2 fw-bold text-warning"><?= $openDiagnosis ?></div>
-        <a href="<?= e(base_url()) ?>/modules/ho-tro-ky-thuat/chan-doan/index.php" class="small">Xem danh sach &raquo;</a>
+    <a href="<?= e(base_url()) ?>/modules/ho-tro-ky-thuat/chan-doan/index.php" class="text-decoration-none text-reset">
+      <div class="kpi-card">
+        <div class="kpi-icon" style="background:#fff3cd;">&#9203;</div>
+        <div>
+          <div class="kpi-value"><?= $openDiagnosis ?></div>
+          <div class="kpi-label">Ca chan doan dang mo / dang xu ly</div>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
   <div class="col-md-4">
-    <div class="card border-0 shadow-sm">
-      <div class="card-body">
-        <div class="text-muted small">Ca da tu van / hoan thanh</div>
-        <div class="fs-2 fw-bold text-success"><?= $doneDiagnosis ?></div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#e5eefc;">&#9989;</div>
+      <div>
+        <div class="kpi-value"><?= $doneDiagnosis ?></div>
+        <div class="kpi-label">Ca da tu van / hoan thanh</div>
       </div>
     </div>
   </div>
@@ -73,7 +78,7 @@ include __DIR__ . '/includes/layout_start.php';
         <tr>
           <td><?= e($row['customer_name']) ?></td>
           <td><?= e(category_label($row['problem_category'])) ?></td>
-          <td><span class="badge <?= status_badge_class($row['status']) ?>"><?= e(status_label($row['status'])) ?></span></td>
+          <td><span class="<?= status_badge_class($row['status']) ?>"><span class="dot <?= status_dot_class($row['status']) ?>"></span><?= e(status_label($row['status'])) ?></span></td>
           <td><?= e($row['creator_name'] ?? '-') ?></td>
           <td><?= e($row['created_at']) ?></td>
           <td><a href="<?= e(base_url()) ?>/modules/ho-tro-ky-thuat/chan-doan/view.php?id=<?= (int)$row['id'] ?>" class="btn btn-sm btn-outline-primary">Xem</a></td>

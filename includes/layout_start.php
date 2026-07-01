@@ -18,8 +18,8 @@ $flash = flash_get();
 <div class="d-flex">
   <?php include __DIR__ . '/sidebar.php'; ?>
   <div class="flex-grow-1">
-    <nav class="navbar navbar-light bg-white border-bottom px-3">
-      <span class="navbar-brand mb-0 h5"><?= e($pageTitle ?? '') ?></span>
+    <nav class="navbar topbar px-3">
+      <span class="page-title"><?= e($pageTitle ?? '') ?></span>
       <?php if ($user): ?>
       <div class="d-flex align-items-center gap-3">
         <span class="text-muted small"><?= e($user['name']) ?> (<?= e(role_label($user['role'])) ?>)</span>

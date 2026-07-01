@@ -40,7 +40,7 @@ include __DIR__ . '/../../../includes/layout_start.php';
   <a href="form.php" class="btn btn-primary btn-sm">+ Tao yeu cau chan doan</a>
 </div>
 
-<form method="get" class="row g-2 mb-3">
+<form method="get" class="row g-2 mb-3 filter-bar">
   <div class="col-auto">
     <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
       <option value="">Tat ca trang thai</option>
@@ -83,8 +83,8 @@ include __DIR__ . '/../../../includes/layout_start.php';
           <td><?= e($row['customer_name']) ?></td>
           <td><?= e($row['agent_name'] ?? '') ?> <?= $row['location'] ? '('.e($row['location']).')' : '' ?></td>
           <td><?= $row['pond_area'] ? e((string)$row['pond_area']) . ' m2' : '-' ?></td>
-          <td><?= e(category_label($row['problem_category'])) ?></td>
-          <td><span class="badge <?= status_badge_class($row['status']) ?>"><?= e(status_label($row['status'])) ?></span></td>
+          <td><span class="tag <?= e(category_tag_class($row['problem_category'])) ?>"><?= e(category_label($row['problem_category'])) ?></span></td>
+          <td><span class="<?= status_badge_class($row['status']) ?>"><span class="dot <?= status_dot_class($row['status']) ?>"></span><?= e(status_label($row['status'])) ?></span></td>
           <td><?= e($row['creator_name'] ?? '-') ?></td>
           <td><?= e($row['created_at']) ?></td>
           <td><a href="view.php?id=<?= (int)$row['id'] ?>" class="btn btn-sm btn-outline-primary">Xem</a></td>

@@ -38,7 +38,7 @@ include __DIR__ . '/../../../includes/layout_start.php';
   <?php endif; ?>
 </div>
 
-<form method="get" class="row g-2 mb-3">
+<form method="get" class="row g-2 mb-3 filter-bar">
   <div class="col-auto">
     <select name="category" class="form-select form-select-sm" onchange="this.form.submit()">
       <option value="">Tat ca danh muc</option>
@@ -63,7 +63,7 @@ include __DIR__ . '/../../../includes/layout_start.php';
     <div class="col-md-4">
       <div class="card h-100 border-0 shadow-sm">
         <div class="card-body">
-          <span class="badge bg-primary-subtle text-primary-emphasis mb-2"><?= e(category_label($proc['category'])) ?></span>
+          <span class="tag <?= e(category_tag_class($proc['category'])) ?> mb-2 d-inline-block"><?= e(category_label($proc['category'])) ?></span>
           <h6 class="card-title"><?= e($proc['title']) ?></h6>
           <p class="card-text text-muted small"><?= e($proc['summary'] ?? '') ?></p>
         </div>

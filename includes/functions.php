@@ -36,6 +36,21 @@ function all_categories(): array
     return ['khi_doc', 'gan', 'duong_ruot', 'mau_nuoc', 'uong_gieo', 'ao_lang', 'day_ao_nhot_bat', 'khac'];
 }
 
+function category_tag_class(string $category): string
+{
+    $classes = [
+        'khi_doc' => 'tag-red',
+        'gan' => 'tag-orange',
+        'duong_ruot' => 'tag-amber',
+        'mau_nuoc' => 'tag-green',
+        'uong_gieo' => 'tag-teal',
+        'ao_lang' => 'tag-blue',
+        'day_ao_nhot_bat' => 'tag-purple',
+        'khac' => 'tag-gray',
+    ];
+    return $classes[$category] ?? 'tag-gray';
+}
+
 function status_label(string $status): string
 {
     $labels = [
@@ -50,12 +65,23 @@ function status_label(string $status): string
 function status_badge_class(string $status): string
 {
     $classes = [
-        'moi' => 'bg-secondary',
-        'dang_xu_ly' => 'bg-warning text-dark',
-        'da_tu_van' => 'bg-info text-dark',
-        'hoan_thanh' => 'bg-success',
+        'moi' => 'status-pill status-moi',
+        'dang_xu_ly' => 'status-pill status-dang-xu-ly',
+        'da_tu_van' => 'status-pill status-da-tu-van',
+        'hoan_thanh' => 'status-pill status-hoan-thanh',
     ];
-    return $classes[$status] ?? 'bg-secondary';
+    return $classes[$status] ?? 'status-pill status-moi';
+}
+
+function status_dot_class(string $status): string
+{
+    $classes = [
+        'moi' => 'dot-gray',
+        'dang_xu_ly' => 'dot-amber',
+        'da_tu_van' => 'dot-blue',
+        'hoan_thanh' => 'dot-green',
+    ];
+    return $classes[$status] ?? 'dot-gray';
 }
 
 /**
