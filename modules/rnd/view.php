@@ -49,16 +49,17 @@ include __DIR__ . '/../../includes/layout_start.php';
       &middot; Phu trach: <?= e($experiment['creator_name'] ?? '-') ?>
     </small>
   </div>
+  <div class="text-nowrap">
+    <a href="export_word.php?id=<?= $id ?>" class="btn btn-sm btn-outline-primary">Xuat bao cao Word</a>
   <?php if (in_array($user['role'], ['rd', 'manager'], true)): ?>
-    <div class="text-nowrap">
       <a href="form.php?id=<?= $id ?>" class="btn btn-sm btn-outline-secondary">Sua</a>
       <form method="post" action="delete.php" class="d-inline" onsubmit="return confirm('Xoa thi nghiem nay?')">
         <?= csrf_field() ?>
         <input type="hidden" name="id" value="<?= $id ?>">
         <button class="btn btn-sm btn-outline-danger">Xoa</button>
       </form>
-    </div>
   <?php endif; ?>
+  </div>
 </div>
 
 <div class="card border-0 shadow-sm mb-3">

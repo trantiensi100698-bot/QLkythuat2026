@@ -60,5 +60,9 @@ function user_initials(string $name): string
 
     <li class="nav-section-label">Danh muc</li>
     <li><?= nav_link('products', $activeMenu, base_url() . '/modules/ho-tro-ky-thuat/thu-vien/products.php', 'San pham Biogency', '&#129514;') ?></li>
+    <li><?= nav_link('farm-ponds', $activeMenu, base_url() . '/modules/nhat-ky-farm/ponds.php', 'Ao farm Biogency', '&#127958;') ?></li>
+    <?php if ($sbUser && in_array($sbUser['role'], ['rd', 'manager'], true)): ?>
+      <li><?= nav_link('users', $activeMenu, base_url() . '/modules/users/index.php', 'Nguoi dung', '&#128100;') ?></li>
+    <?php endif; ?>
   </ul>
 </div>

@@ -64,8 +64,14 @@ Ap dung duoc voi **moi goi Hostinger** (Shared/Business/Premium) vi chi can PHP 
 /uploads/                              Anh/file upload (khong commit len git)
 ```
 
+## Quan ly nguoi dung va xuat bao cao
+
+- **Quan ly nguoi dung**: RD/Manager vao muc **Nguoi dung** o sidebar de tao tai khoan cho Hieu (sale), Ms Tu Anh (manager)..., doi vai tro, khoa/mo khoa, doi mat khau - khong can dung CLI nua (`create_admin.php` van con de tao tai khoan RD dau tien).
+- **Xuat bao cao Word**: o trang chi tiet thi nghiem R&D va chi tiet chuyen di thi truong co nut "Xuat bao cao Word" - tu dong sinh file `.doc` tu du lieu da nhap (khong can tu soan lai).
+- **Xuat Excel**: o danh sach Chan doan ao va Nhat ky farm co nut "Xuat Excel" de tai bang du lieu dang xem (theo bo loc hien tai) ra file `.xls`.
+- Cac file xuat dung dinh dang HTML-trong-.doc/.xls (khong can thu vien ngoai nhu PhpWord/PhpSpreadsheet) nen mo tot bang Microsoft Word/Excel nhung khong phai file OOXML chuan; neu can dinh dang phuc tap hon (logo, template chuan cong ty) co the nang cap len PhpWord/PhpSpreadsheet qua Composer sau.
+
 ## Chua lam / huong phat trien tiep
 
-- Trang quan ly nguoi dung rieng (hien tai tao tai khoan qua CLI `create_admin.php`, doi role phai sua truc tiep trong database).
-- Export/tong hop du lieu R&D va bao cao chuyen di thanh file Word/PPT/Excel tu dong (hien tai la upload file da lam san, chua tu sinh file).
 - Thong bao (email/Zalo...) khi co ca chan doan moi hoac tu van moi.
+- Trang quen mat khau tu dong (hien tai RD/Manager doi mat khau ho qua trang Nguoi dung).

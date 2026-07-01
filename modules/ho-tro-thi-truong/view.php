@@ -42,13 +42,16 @@ include __DIR__ . '/../../includes/layout_start.php';
       &middot; Thuc hien: <?= e($visit['creator_name'] ?? '-') ?><?php if ($visit['participants']): ?> + <?= e($visit['participants']) ?><?php endif; ?>
     </small>
   </div>
-  <?php if (in_array($user['role'], ['rd', 'manager'], true)): ?>
-    <form method="post" action="delete.php" onsubmit="return confirm('Xoa chuyen di nay?')">
-      <?= csrf_field() ?>
-      <input type="hidden" name="id" value="<?= $id ?>">
-      <button class="btn btn-sm btn-outline-danger">Xoa</button>
-    </form>
-  <?php endif; ?>
+  <div class="text-nowrap">
+    <a href="export_word.php?id=<?= $id ?>" class="btn btn-sm btn-outline-primary">Xuat bao cao Word</a>
+    <?php if (in_array($user['role'], ['rd', 'manager'], true)): ?>
+      <form method="post" action="delete.php" class="d-inline" onsubmit="return confirm('Xoa chuyen di nay?')">
+        <?= csrf_field() ?>
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <button class="btn btn-sm btn-outline-danger">Xoa</button>
+      </form>
+    <?php endif; ?>
+  </div>
 </div>
 
 <div class="card border-0 shadow-sm mb-3">

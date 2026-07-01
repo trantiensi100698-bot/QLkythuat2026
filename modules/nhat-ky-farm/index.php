@@ -32,6 +32,7 @@ include __DIR__ . '/../../includes/layout_start.php';
 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
   <h5 class="mb-0">Nhat ky farm nuoi Biogency</h5>
   <div class="d-flex gap-2">
+    <a href="export_excel.php?pond_id=<?= (int)$pondId ?>" class="btn btn-outline-secondary btn-sm">Xuat Excel</a>
     <a href="ponds.php" class="btn btn-outline-secondary btn-sm">Quan ly ao farm</a>
     <a href="form.php" class="btn btn-primary btn-sm">+ Ghi nhat ky moi</a>
   </div>

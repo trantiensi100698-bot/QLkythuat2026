@@ -37,7 +37,10 @@ include __DIR__ . '/../../../includes/layout_start.php';
 
 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
   <h5 class="mb-0">Chan doan / ho tro ky thuat tai ao</h5>
-  <a href="form.php" class="btn btn-primary btn-sm">+ Tao yeu cau chan doan</a>
+  <div class="d-flex gap-2">
+    <a href="export_excel.php?status=<?= e($status) ?>&category=<?= e($category) ?>" class="btn btn-outline-secondary btn-sm">Xuat Excel</a>
+    <a href="form.php" class="btn btn-primary btn-sm">+ Tao yeu cau chan doan</a>
+  </div>
 </div>
 
 <form method="get" class="row g-2 mb-3 filter-bar">

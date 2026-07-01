@@ -273,6 +273,49 @@ function market_visit_type_tag_class(string $type): string
     return $classes[$type] ?? 'tag-gray';
 }
 
+/**
+ * Xuat mot doan HTML thanh file .doc de mo truc tiep bang Microsoft Word
+ * (khong can thu vien ngoai nhu PhpWord - phu hop hosting khong co Composer/SSH).
+ */
+function export_html_as_word(string $bodyHtml, string $filename): void
+{
+    $html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+        . '<head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:14px;} table{border-collapse:collapse;width:100%;margin-bottom:12px;} td,th{border:1px solid #999;padding:6px;} h1{font-size:20px;} h2{font-size:16px;margin-top:18px;}</style></head>'
+        . '<body>' . $bodyHtml . '</body></html>';
+
+    header('Content-Type: application/msword; charset=utf-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '.doc"');
+    echo $html;
+    exit;
+}
+
+/**
+ * Xuat 1 bang du lieu thanh file .xls de mo truc tiep bang Microsoft Excel
+ * (dung bang HTML - khong can thu vien ngoai).
+ */
+function export_table_as_excel(array $headers, array $rows, string $filename): void
+{
+    $html = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body>';
+    $html .= '<table border="1"><thead><tr>';
+    foreach ($headers as $h) {
+        $html .= '<th>' . e($h) . '</th>';
+    }
+    $html .= '</tr></thead><tbody>';
+    foreach ($rows as $row) {
+        $html .= '<tr>';
+        foreach ($row as $cell) {
+            $html .= '<td>' . e((string)$cell) . '</td>';
+        }
+        $html .= '</tr>';
+    }
+    $html .= '</tbody></table></body></html>';
+
+    header('Content-Type: application/vnd.ms-excel; charset=utf-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
+    echo $html;
+    exit;
+}
+
 function redirect(string $path): void
 {
     header('Location: ' . base_url() . $path);
